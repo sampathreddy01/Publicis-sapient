@@ -16,19 +16,7 @@ pipeline {
        }
    	}
 	
-	/*
-	stage('Publish Test Coverage Report') {
-         steps {
-           step([$class: 'JacocoPublisher', 
-                execPattern: '**/build/jacoco/*.exec',
-                classPattern: '**/build/classes',
-                sourcePattern: 'src/main/java',
-                exclusionPattern: 'src/test*'
-                ])
-            }
-        }
-        */
-        
+	
     stage('Jacoco Coverage Report') {
         steps{
             jacoco()
@@ -38,10 +26,10 @@ pipeline {
 	stage('SonarQube'){
          steps{
             bat label: '', script: '''mvn sonar:sonar \
-		 -Dsonar.host.url=http://localhost:9000 \
- 		-Dsonar.login=9384a2658e9c09b92823e7758c88a0d7558b87d1'''
+		 -Dsonar.host.url=http://localhost:9001 \
+ 		-Dsonar.login=6d886f078d203e2a158bd2524d7dc06332260471'''
           }
-	
+	}
 	stage('Maven Package'){
 		steps{
 			echo 'Project packaging stage'
